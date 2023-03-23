@@ -1,0 +1,27 @@
+@use '../../styles/mixins.scss';
+
+.wrapper {
+  @include mixins.flexible(flex-start);
+
+  font-size: var(--font-size-l);
+  color: var(--font-color-secondary);
+
+  cursor: pointer;
+  user-select: none;
+}
+
+.checkbox {
+  width: var(--chekbox-size);
+  height: var(--chekbox-size);
+
+  @include mixins.flexible();
+
+  background-color: var(--white);
+  border: var(--border);
+  border-radius: var(--radius-xs);
+  box-shadow: var(--box-shadow);
+}
+
+.label {
+  margin-left: 6px;
+}

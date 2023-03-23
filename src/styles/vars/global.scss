@@ -8,4 +8,23 @@
   --light-green: #D8FCB0;
   --dark-blue: #C6D9FF;
   --yellow: #FFF4C7;
+  --white: #FFFFFF;
+  --border-color: #CACACA;
+  --gray: #E0E0E0;
+
+  //Font
+  --font-size-xs: 12px;
+  --font-size-s: 14px;
+  --font-size-m: 15px;
+  --font-size-l: 16px;
+
+  --font-color-primary: #333333;
+  --font-color-secondary: #292929;
+
+  //Radius
+  --radius-xs: 2px;
+
+  //Common
+  --border: 1px solid var(--border-color);
+  --box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.12);
 }

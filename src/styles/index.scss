@@ -1,2 +1,7 @@
 @import 'reset';
 @import 'vars/global';
+@import 'vars/components';
+
+* {
+  font-size: var(--font-size-m);
+}
