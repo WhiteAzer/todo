@@ -1,34 +1,34 @@
 :root {
-  //colors
-  --violet: #EEE1FD;
-  --green: #BAF8CF;
-  --red: #FED6CC;
-  --orange: #FFDCB6;
-  --blue: #B8E6FF;
-  --light-green: #D8FCB0;
-  --dark-blue: #C6D9FF;
-  --yellow: #FFF4C7;
-  --white: #FFFFFF;
-  --border-color: #CACACA;
-  --gray: #E0E0E0;
-  --yellow-btn: #FFE445;
+	//colors
+	--violet: #eee1fd;
+	--green: #baf8cf;
+	--red: #fed6cc;
+	--orange: #ffdcb6;
+	--blue: #b8e6ff;
+	--light-green: #d8fcb0;
+	--dark-blue: #c6d9ff;
+	--yellow: #fff4c7;
+	--white: #ffffff;
+	--border-color: #cacaca;
+	--gray: #e0e0e0;
+	--yellow-btn: #ffe445;
 
-  //Font
-  --font-size-xs: 12px;
-  --font-size-s: 14px;
-  --font-size-m: 15px;
-  --font-size-l: 16px;
+	//Font
+	--font-size-xs: 12px;
+	--font-size-s: 14px;
+	--font-size-m: 15px;
+	--font-size-l: 16px;
 
-  --font-color-primary: #333333;
-  --font-color-secondary: #292929;
+	--font-color-primary: #333333;
+	--font-color-secondary: #292929;
 
-  //Radius
-  --radius-xs: 2px;
-  --radius-s: 5px;
-  --radius-m: 6px;
-  --radius-l: 7px;
+	//Radius
+	--radius-xs: 2px;
+	--radius-s: 5px;
+	--radius-m: 6px;
+	--radius-l: 7px;
 
-  //Common
-  --border: 1px solid var(--border-color);
-  --box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.12);
+	//Common
+	--border: 1px solid var(--border-color);
+	--box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.12);
 }

@@ -1,27 +1,27 @@
 @use '../../styles/mixins';
 
 .wrapper {
-  @include mixins.flexible(flex-start);
+	@include mixins.flexible(flex-start);
 
-  font-size: var(--font-size-l);
-  color: var(--font-color-secondary);
+	font-size: var(--font-size-l);
+	color: var(--font-color-secondary);
 
-  cursor: pointer;
-  user-select: none;
+	cursor: pointer;
+	user-select: none;
 }
 
 .checkbox {
-  width: var(--chekbox-size);
-  height: var(--chekbox-size);
+	width: var(--chekbox-size);
+	height: var(--chekbox-size);
 
-  @include mixins.flexible();
+	@include mixins.flexible();
 
-  background-color: var(--white);
-  border: var(--border);
-  border-radius: var(--radius-xs);
-  box-shadow: var(--box-shadow);
+	background-color: var(--white);
+	border: var(--border);
+	border-radius: var(--radius-xs);
+	box-shadow: var(--box-shadow);
 }
 
 .label {
-  margin-left: 6px;
+	margin-left: 6px;
 }

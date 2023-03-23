@@ -4,8 +4,8 @@
 
 ## Technologies
 
-- Typescript
-- React
-- Redux Toolkit
-- React Router Dom
-- SCSS
+-   Typescript
+-   React
+-   Redux Toolkit
+-   React Router Dom
+-   SCSS

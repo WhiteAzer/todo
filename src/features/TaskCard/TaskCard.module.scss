@@ -1,40 +1,40 @@
-@use "../../styles/mixins";
+@use '../../styles/mixins';
 
 .card {
-  width: var(--task-card-width);
+	width: var(--task-card-width);
 
-  padding: 12px;
+	padding: 12px;
 
-  background: var(--white);
-  box-shadow: var(--box-shadow);
-  border-radius: var(--radius-m);
+	background: var(--white);
+	box-shadow: var(--box-shadow);
+	border-radius: var(--radius-m);
 
-  cursor: pointer;
+	cursor: pointer;
 }
 
 .topSide {
-  @include mixins.flexible(space-between, flex-start);
-  margin-bottom: 10px;
+	@include mixins.flexible(space-between, flex-start);
+	margin-bottom: 10px;
 }
 
 .moreBtn {
-  padding: 5px 0;
-  display: flex;
+	padding: 5px 0;
+	display: flex;
 }
 
 .bottomSide {
-  @include mixins.flexible(space-between, flex-end);
+	@include mixins.flexible(space-between, flex-end);
 }
 
 .tags {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  grid-column-gap: 6px;
-  grid-row-gap: 6px;
+	display: grid;
+	grid-template-columns: repeat(4, 1fr);
+	grid-column-gap: 6px;
+	grid-row-gap: 6px;
 }
 
 .indicators {
-  display: flex;
+	display: flex;
 }
 //  &_content {
 //    &__title {
