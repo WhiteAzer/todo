@@ -3,7 +3,7 @@ import MiniCssExtractPlugin from 'mini-css-extract-plugin';
 
 export const buildLoaders = (isDev: boolean): RuleSetRule[] => {
 	const assetLoader = {
-		test: /\.(png|svg|jpg|jpeg|gif)$/i,
+		test: /\.(png|jpg|jpeg|gif)$/i,
 		type: 'asset/resource',
 	};
 
