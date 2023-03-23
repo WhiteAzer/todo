@@ -1,21 +1,10 @@
 import { FC } from 'react';
 import styles from './Tag.module.scss';
 import classNames from 'classnames';
-import { PropSize, TPropsWithClass, TPropsWithSize } from '../../types/global';
-
-export enum Color {
-	VIOLET = 'violet',
-	GREEN = 'green',
-	RED = 'red',
-	ORANGE = 'orange',
-	BLUE = 'blue',
-	LIGHT_GREEN = 'lightGreen',
-	DARK_BLUE = 'darkBlue',
-	YELLOW = 'yellow',
-}
+import { PropSize, TagColor, TPropsWithClass, TPropsWithSize } from '../../types/global';
 
 type TProps = {
-	color: string;
+	color: TagColor;
 } & TPropsWithClass &
 	TPropsWithSize<Exclude<PropSize, PropSize.L>>;
 

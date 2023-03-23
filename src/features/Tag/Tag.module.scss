@@ -1,5 +1,5 @@
 .tag {
-  border-radius: 2px;
+  border-radius: var(--radius-xs);
 }
 
 .violet {
@@ -22,11 +22,11 @@
   background-color: var(--blue);
 }
 
-.light-green {
+.lightGreen {
   background-color: var(--light-green);
 }
 
-.dark-blue {
+.darkBlue {
   background-color: var(--dark-blue);
 }
 
@@ -35,16 +35,16 @@
 }
 
 .M {
-  height: 24px;
-  width: 90px;
+  height: var(--tag-height-m);
+  width: var(--tag-width-m-m);
 }
 
 .S {
-  height: 24px;
-  width: 60px;
+  height: var(--tag-height-s);
+  width: var(--tag-width-s);
 }
 
 .XS {
-  height: 18px;
-  width: 40px;
+  height: var(--tag-height-xs);
+  width: var(--tag-width-xs);
 }
