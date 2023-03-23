@@ -1,0 +1,18 @@
+.input {
+	width: 100%;
+	padding: 12px;
+
+	background: var(--white);
+	box-shadow: var(--box-shadow);
+	border-radius: var(--radius-s);
+
+	resize: none;
+
+	&:focus {
+		outline: none;
+	}
+}
+
+.multiline {
+	height: 150px;
+}
