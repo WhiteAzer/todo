@@ -1,0 +1,40 @@
+@use "../../styles/mixins";
+
+.btn {
+  @include mixins.flexible();
+  border-radius: var(--radius-s);
+  font-size: var(--font-size-l);
+  cursor: pointer;
+}
+
+.primary {
+  background: var(--yellow-btn);
+}
+
+.secondary {
+  background: var(--white);
+  box-shadow: var(--box-shadow);
+}
+
+.none {
+  background: inherit;
+}
+
+.bordered {
+  border: var(--border);
+}
+
+.XS {
+  padding: 8px 12px;
+  border-radius: var(--radius-s);
+  font-size: var(--font-size-s);
+}
+
+.S {
+  padding: 13px 40px;
+}
+
+.M {
+  width: 100%;
+  padding: 14px 0;
+}
