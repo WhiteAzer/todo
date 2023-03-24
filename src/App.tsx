@@ -9,6 +9,7 @@ import { Input } from './components/Input/Input';
 import { BaseSyntheticEvent, useState } from 'react';
 import { TagsList } from './features/TagsList/TagsList';
 import { Comment } from './features/Comment/Comment';
+import { Filters } from './features/Filters/Filters';
 
 export const App = () => {
 	const [value, setValue] = useState('');
@@ -47,6 +48,7 @@ export const App = () => {
 					'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusamus aspernatur atque autem consequuntur cumque distinctio dolore facere illo inventore iusto magnam maiores nemo omnis praesentium quas quasi quisquam repellat, voluptate.'
 				}
 			/>
+			<Filters />
 		</>
 	);
 };
