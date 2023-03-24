@@ -4,8 +4,7 @@ import { PropSize, TagColor, TPropsWithClass } from '../../types/global';
 import { FC } from 'react';
 import { TTags } from '../../types/data';
 import MoreBtn from '../../assets/more-btn.svg';
-import CommentIcon from '../../assets/comment-icon.svg';
-import DescriptionIcon from '../../assets/description-icon.svg';
+import { ContentIndicators } from '../ContentIndicators/ContentIndicators';
 
 type TProps = TPropsWithClass<{
 	id?: string;
@@ -37,10 +36,7 @@ export const TaskCard: FC<TProps> = ({ id }) => {
 						<Tag color={i} size={PropSize.XS} key={i} />
 					))}
 				</div>
-				<div className={styles.indicators}>
-					{mockIsCommented && <CommentIcon />}
-					{mockIsDescribed && <DescriptionIcon />}
-				</div>
+				<ContentIndicators isCommented={mockIsCommented} isDescribed={mockIsDescribed} />
 			</div>
 		</div>
 	);
