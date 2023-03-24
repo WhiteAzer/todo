@@ -1,7 +1,6 @@
 import styles from './Input.module.scss';
-
 import classNames from 'classnames';
-import React, { FC, HTMLProps } from 'react';
+import { FC, HTMLProps } from 'react';
 import { TPropsWithClass } from '../../types/global';
 
 type TProps = {

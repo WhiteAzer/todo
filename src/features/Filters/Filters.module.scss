@@ -1,5 +1,5 @@
 @use '../../styles/mixins';
 
 .wrapper {
-  @include mixins.flexible(space-between)
+	@include mixins.flexible(space-between);
 }
