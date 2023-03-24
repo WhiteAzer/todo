@@ -24,6 +24,7 @@ export const App = () => {
 			<Checkbox label={'Text'} />
 			<Checkbox />
 			<TaskCard />
+			<TagsList />
 			<Button theme={BtnThemes.PRIMARY} size={PropSize.M}>
 				<PlusIcon /> Добавить тикет
 			</Button>
@@ -41,7 +42,6 @@ export const App = () => {
 			</Button>
 			<Input isMultiline={false} value={value} onChange={handleChange} />
 			<Input isMultiline={true} value={value} onChange={handleChange} />
-			<TagsList />
 			<Comment
 				author={'Lorem ipsum'}
 				text={
