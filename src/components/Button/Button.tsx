@@ -1,6 +1,6 @@
 import styles from './Button.module.scss';
 import classNames from 'classnames';
-import { FC, PropsWithChildren } from 'react';
+import { FC, HTMLAttributes, PropsWithChildren } from 'react';
 import { PropSize, TPropsWithClass, TPropsWithSize } from '../../types/global';
 
 export enum BtnThemes {
@@ -14,7 +14,8 @@ type TProps = {
 	theme: BtnThemes;
 } & TPropsWithClass &
 	TPropsWithSize<Exclude<PropSize, PropSize.L>> &
-	PropsWithChildren;
+	PropsWithChildren &
+	HTMLAttributes<HTMLButtonElement>;
 
 export const Button: FC<TProps> = ({ theme, size, children, className, ...props }) => {
 	return (
