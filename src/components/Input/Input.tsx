@@ -1,31 +1,24 @@
 import styles from './Input.module.scss';
 
 import classNames from 'classnames';
-import React, { BaseSyntheticEvent, FC, useState } from 'react';
+import React, { BaseSyntheticEvent, FC, HTMLAttributes, HTMLProps, useState } from 'react';
 import { TPropsWithClass } from '../../types/global';
 
 type TProps = {
 	isMultiline: boolean;
-	handleChange: (e: BaseSyntheticEvent) => void;
-	value: string;
-} & TPropsWithClass;
+} & TPropsWithClass &
+	HTMLProps<HTMLInputElement> &
+	HTMLProps<HTMLTextAreaElement>;
 
-export const Input: FC<TProps> = ({ isMultiline = false, handleChange, value, className }) => {
+export const Input: FC<TProps> = ({ isMultiline = false, className, ...props }) => {
 	if (isMultiline) {
 		return (
 			<textarea
 				className={classNames(styles.input, styles.multiline, className)}
-				value={value}
-				onChange={handleChange}
+				{...props}
 			/>
 		);
 	} else {
-		return (
-			<input
-				className={classNames(styles.input, className)}
-				value={value}
-				onChange={handleChange}
-			/>
-		);
+		return <input className={classNames(styles.input, className)} {...props} />;
 	}
 };

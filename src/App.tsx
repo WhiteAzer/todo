@@ -7,6 +7,7 @@ import { Checkbox } from './components/Checkbox/Checkbox';
 import { TaskCard } from './features/TaskCard/TaskCard';
 import { Input } from './components/Input/Input';
 import { BaseSyntheticEvent, useState } from 'react';
+import { TagsList } from './features/TagsList/TagsList';
 
 export const App = () => {
 	const [value, setValue] = useState('');
@@ -36,8 +37,9 @@ export const App = () => {
 			<Button theme={BtnThemes.BORDERED} size={PropSize.XS}>
 				Добавить
 			</Button>
-			<Input isMultiline={false} value={value} handleChange={handleChange} />
-			<Input isMultiline={true} value={value} handleChange={handleChange} />
+			<Input isMultiline={false} value={value} onChange={handleChange} />
+			<Input isMultiline={true} value={value} onChange={handleChange} />
+			<TagsList />
 		</>
 	);
 };

@@ -7,14 +7,15 @@ import { useToggle } from '../../hooks/useToggle';
 
 type TProps = TPropsWithClass<{
 	label?: string;
+	isChecked?: boolean;
 }>;
 
-export const Checkbox: FC<TProps> = ({ label, className }) => {
-	const [isChecked, toggleIsChecked] = useToggle(false);
+export const Checkbox: FC<TProps> = ({ label, isChecked, className }) => {
+	const [check, toggleCheck] = useToggle(isChecked);
 
 	return (
-		<div className={classNames(styles.wrapper, className)} onClick={toggleIsChecked}>
-			<div className={styles.checkbox}>{isChecked && <CheckboxIcon />}</div>
+		<div className={classNames(styles.wrapper, className)} onClick={toggleCheck}>
+			<div className={styles.checkbox}>{check && <CheckboxIcon />}</div>
 			<span className={styles.label}>{label}</span>
 		</div>
 	);
