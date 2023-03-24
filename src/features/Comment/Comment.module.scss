@@ -1,0 +1,23 @@
+.wrapper {
+  width: 100%;
+  position: relative;
+}
+
+.author {
+  font-size: var(--font-size-s);
+  margin-bottom: 6px;
+  max-width: calc(100% - 20px);
+}
+
+.text {
+  font-size: var(--font-size-xs);
+  color: var(--font-color-comment);
+  line-height: 19px;
+}
+
+.close {
+  cursor: pointer;
+  position: absolute;
+  right: 0;
+  top: 0;
+}

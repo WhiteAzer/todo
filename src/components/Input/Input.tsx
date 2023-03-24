@@ -1,7 +1,7 @@
 import styles from './Input.module.scss';
 
 import classNames from 'classnames';
-import React, { BaseSyntheticEvent, FC, HTMLAttributes, HTMLProps, useState } from 'react';
+import React, { FC, HTMLProps } from 'react';
 import { TPropsWithClass } from '../../types/global';
 
 type TProps = {

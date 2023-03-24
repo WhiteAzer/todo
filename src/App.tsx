@@ -8,6 +8,7 @@ import { TaskCard } from './features/TaskCard/TaskCard';
 import { Input } from './components/Input/Input';
 import { BaseSyntheticEvent, useState } from 'react';
 import { TagsList } from './features/TagsList/TagsList';
+import { Comment } from './features/Comment/Comment';
 
 export const App = () => {
 	const [value, setValue] = useState('');
@@ -40,6 +41,12 @@ export const App = () => {
 			<Input isMultiline={false} value={value} onChange={handleChange} />
 			<Input isMultiline={true} value={value} onChange={handleChange} />
 			<TagsList />
+			<Comment
+				author={'Lorem ipsum'}
+				text={
+					'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusamus aspernatur atque autem consequuntur cumque distinctio dolore facere illo inventore iusto magnam maiores nemo omnis praesentium quas quasi quisquam repellat, voluptate.'
+				}
+			/>
 		</>
 	);
 };
