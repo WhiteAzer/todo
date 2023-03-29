@@ -1,0 +1,11 @@
+.wrapper {
+	width: var(--task-page-width);
+}
+
+.backBtn {
+	margin-bottom: 70px;
+
+	& > svg {
+		margin-right: 18px;
+	}
+}
