@@ -1,9 +1,6 @@
 @use '../../styles/mixins';
 
 .wrapper {
-	min-height: 100vh;
-	padding: 40px;
-	margin-left: 130px;
 	box-sizing: content-box;
 	max-width: calc(var(--tasks-column-width) * 3 + 12px * 2);
 }
