@@ -1,79 +1,45 @@
 import styles from './TasksColumn.module.scss';
 import { FC } from 'react';
-import { PropSize, TagColor } from '../../types/global';
+import { PropSize } from '../../types/global';
 import { TaskCard } from '../TaskCard/TaskCard';
 import { BtnThemes, Button } from '../../components/Button/Button';
 import PlusIcon from '../../assets/plus-icon.svg';
-import { Modal } from '../Modal/Modal';
-import { TaskForm, TaskFormMode } from '../TaskForm/TaskForm';
-import { useModal } from '../../hooks/useModal';
-import { ModalPanel } from '../ModlalPanel/ModalPanel';
-
-const mock = [
-	{
-		title: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit.',
-		tags: [
-			TagColor.BLUE,
-			TagColor.DARK_BLUE,
-			TagColor.LIGHT_GREEN,
-			TagColor.ORANGE,
-			TagColor.VIOLET,
-		],
-		isCommented: true,
-		isDescribed: true,
-	},
-	{
-		title: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit.',
-		tags: [
-			TagColor.BLUE,
-			TagColor.DARK_BLUE,
-			TagColor.LIGHT_GREEN,
-			TagColor.ORANGE,
-			TagColor.VIOLET,
-		],
-		isCommented: true,
-		isDescribed: true,
-	},
-	{
-		title: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit.',
-		tags: [
-			TagColor.BLUE,
-			TagColor.DARK_BLUE,
-			TagColor.LIGHT_GREEN,
-			TagColor.ORANGE,
-			TagColor.VIOLET,
-		],
-		isCommented: true,
-		isDescribed: true,
-	},
-];
+import { Link } from 'react-router-dom';
+import { TaskColumns, TaskColumnsTitles } from '../../types/data';
+import { useAppSelector } from '../../store/hooks/useTypedSelector';
+import { selectTasks } from '../../store/slices/tasks/selectors';
+import { TTasks } from '../../types/tasks';
 
 type TProps = {
-	title: 'Todo' | 'In progress' | 'Done';
+	type: TaskColumns;
 };
 
-export const TasksColumn: FC<TProps> = ({ title }) => {
-	const { isModalOpen, closeModal, openModal } = useModal();
+export const TasksColumn: FC<TProps> = ({ type }) => {
+	const tasks: TTasks = useAppSelector(selectTasks);
 
 	return (
 		<div className={styles.wrapper}>
-			<h2 className={styles.title}>{title}</h2>
+			<h2 className={styles.title}>{TaskColumnsTitles[type]}</h2>
 			<div className={styles.content}>
-				{mock.map((el, i) => (
-					<TaskCard {...el} key={i} className={styles.item} />
+				{tasks[type].map(({ title, tags, comments, description, id }) => (
+					<TaskCard
+						title={title}
+						tags={tags}
+						isCommented={!!comments.length}
+						isDescribed={!!description}
+						key={id}
+						className={styles.item}
+					/>
 				))}
-				{title !== 'Done' && (
-					<Button theme={BtnThemes.PRIMARY} size={PropSize.M} onClick={openModal}>
-						<PlusIcon className={styles.plusIcon} />
-						Добавить тикет
-					</Button>
+				{type !== TaskColumns.DONE && (
+					<Link to={`/create?target=${type}`}>
+						<Button theme={BtnThemes.PRIMARY} size={PropSize.M}>
+							<PlusIcon className={styles.plusIcon} />
+							Добавить тикет
+						</Button>
+					</Link>
 				)}
 			</div>
-			<Modal isOpen={isModalOpen} closeModal={closeModal}>
-				<ModalPanel onClose={closeModal}>
-					<TaskForm mode={TaskFormMode.CREATE} />
-				</ModalPanel>
-			</Modal>
 		</div>
 	);
 };

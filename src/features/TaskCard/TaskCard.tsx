@@ -5,14 +5,15 @@ import { FC } from 'react';
 import { ContentIndicators } from '../ContentIndicators/ContentIndicators';
 import { MoreBtn } from '../MoreBtn/MoreBtn';
 import { Modal } from '../Modal/Modal';
-import { TaskForm, TaskFormMode } from '../TaskForm/TaskForm';
+import { TaskForm } from '../TaskForm/TaskForm';
 import classNames from 'classnames';
 import { useModal } from '../../hooks/useModal';
 import { ModalPanel } from '../ModlalPanel/ModalPanel';
+import { TTagsList } from '../../types/tasks';
 
 type TProps = TPropsWithClass<{
 	title: string;
-	tags: ReadonlyArray<TagColor>;
+	tags: TTagsList;
 	isCommented: boolean;
 	isDescribed: boolean;
 }>;
@@ -28,15 +29,17 @@ export const TaskCard: FC<TProps> = ({ title, tags, isCommented, isDescribed, cl
 			</div>
 			<div className={styles.bottomSide}>
 				<div className={styles.tags}>
-					{tags.map(i => (
-						<Tag color={i} size={PropSize.XS} key={i} />
-					))}
+					{Object.keys(tags)
+						.filter((el: TagColor) => tags[el])
+						.map((el: TagColor) => (
+							<Tag color={el} size={PropSize.XS} key={el} />
+						))}
 				</div>
 				<ContentIndicators isCommented={isCommented} isDescribed={isDescribed} />
 			</div>
 			<Modal isOpen={isModalOpen} closeModal={closeModal}>
 				<ModalPanel onClose={closeModal}>
-					<TaskForm mode={TaskFormMode.EDIT} />
+					<TaskForm label={'Редактировать'} />
 				</ModalPanel>
 			</Modal>
 		</div>
