@@ -11,8 +11,19 @@
 	&:focus {
 		outline: none;
 	}
+
+	&::placeholder {
+		color: var(--font-color-passive);
+		opacity: 1;
+	}
 }
 
 .multiline {
 	height: 150px;
+}
+
+.error {
+	font-size: var(--font-size-xs);
+	color: var(--error-red);
+	margin-left: 10px;
 }
