@@ -1,6 +1,7 @@
 @import 'reset';
 @import 'vars/global';
 @import 'vars/components';
+@import 'vars/pages';
 
 * {
 	font-size: var(--font-size-m);
@@ -11,4 +12,10 @@
 body {
 	background-color: var(--light-gray);
 	line-height: 18px;
+}
+
+.app {
+	min-height: 100vh;
+	padding: 40px;
+	margin-left: 130px;
 }

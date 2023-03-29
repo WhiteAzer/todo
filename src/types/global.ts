@@ -23,3 +23,5 @@ export enum TagColor {
 	DARK_BLUE = 'darkBlue',
 	YELLOW = 'yellow',
 }
+
+export type TBtnSize = Exclude<PropSize, PropSize.L>;
