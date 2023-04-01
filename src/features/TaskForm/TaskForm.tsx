@@ -1,46 +1,29 @@
-import { FC, PropsWithChildren, useCallback, useState } from 'react';
+import { Dispatch, FC, PropsWithChildren, SetStateAction } from 'react';
 import styles from './TaskForm.module.scss';
 import { Input } from '../../components/Input/Input';
 import { BtnThemes, Button } from '../../components/Button/Button';
-import { PropSize, TagColor, TBtnSize } from '../../types/global';
-import { useAppDispatch } from '../../store/hooks/useAppDispatch';
-import { useLocation, useNavigate } from 'react-router-dom';
+import { PropSize } from '../../types/components';
 import { Form, Formik } from 'formik';
-import { addNewTask } from '../../store/slices/tasks';
-import { RoutePaths } from '../../types/routes';
 import { TagsList } from '../TagsList/TagsList';
 import { TTagsList } from '../../types/tasks';
-import { TaskColumns } from '../../types/data';
 
 type TProps = {
 	label: string;
-	btnSize?: TBtnSize;
+	title?: string;
+	description?: string;
+	handleSubmit: ({ title, description }: { title: string; description: string }) => void;
+	tags: TTagsList;
+	setTags: Dispatch<SetStateAction<TTagsList>>;
 } & PropsWithChildren;
 
-const DefaultTags = Object.values(TagColor).reduce((obj, el) => {
-	obj[el] = false;
-	return obj;
-}, {} as TTagsList);
-
-export const TaskForm: FC<TProps> = ({ label, btnSize = PropSize.M, children }) => {
-	const dispatch = useAppDispatch();
-	const navigate = useNavigate();
-
-	const location = useLocation();
-	const params = new URLSearchParams(location.search);
-	const target = (params.get('target') as TaskColumns) || TaskColumns.TODO;
-
-	const [tags, setTags] = useState<TTagsList>(DefaultTags);
-
-	const handleSubmit = useCallback(
-		({ title, description }: { title: string; description: string }) => {
-			dispatch(addNewTask({ target, title, description, tags }));
-
-			navigate(RoutePaths.MAIN);
-		},
-		[tags, dispatch, navigate, target]
-	);
-
+export const TaskForm: FC<TProps> = ({
+	label,
+	handleSubmit,
+	tags,
+	setTags,
+	title = '',
+	description = '',
+}) => {
 	const validate = (values: { title: string }) => {
 		const errors: Partial<typeof values> = {};
 
@@ -59,7 +42,8 @@ export const TaskForm: FC<TProps> = ({ label, btnSize = PropSize.M, children }) 
 			<div className={styles.content}>
 				<Formik
 					initialValues={{
-						title: '',
+						title,
+						description,
 					}}
 					validate={validate}
 					onSubmit={handleSubmit}
@@ -84,7 +68,7 @@ export const TaskForm: FC<TProps> = ({ label, btnSize = PropSize.M, children }) 
 						/>
 						<Button
 							theme={BtnThemes.PRIMARY}
-							size={btnSize}
+							size={PropSize.M}
 							className={styles.btn}
 							type='submit'
 						>
