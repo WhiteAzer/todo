@@ -1,7 +1,7 @@
 import { FC, PropsWithChildren } from 'react';
 import styles from './ModalPanel.module.scss';
 import classNames from 'classnames';
-import { TPropsWithClass } from '../../types/global';
+import { TPropsWithClass } from '../../types/components';
 import CloseIcon from '../../assets/close-icon.svg';
 
 type TProps = {

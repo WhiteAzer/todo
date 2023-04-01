@@ -1,6 +1,6 @@
 import styles from './Comment.module.scss';
 import classNames from 'classnames';
-import { TPropsWithClass } from '../../types/global';
+import { TPropsWithClass } from '../../types/components';
 import { FC } from 'react';
 import CloseIcon from '../../assets/close-icon.svg';
 

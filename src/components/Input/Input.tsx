@@ -1,7 +1,7 @@
 import styles from './Input.module.scss';
 import classNames from 'classnames';
 import { FC, HTMLProps } from 'react';
-import { TPropsWithClass } from '../../types/global';
+import { TPropsWithClass } from '../../types/components';
 import { FieldHookConfig, useField } from 'formik';
 
 type TProps = {

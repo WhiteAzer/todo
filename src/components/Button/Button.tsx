@@ -1,7 +1,7 @@
 import styles from './Button.module.scss';
 import classNames from 'classnames';
 import { ButtonHTMLAttributes, FC, PropsWithChildren } from 'react';
-import { TBtnSize, TPropsWithClass, TPropsWithSize } from '../../types/global';
+import { TBtnSize, TPropsWithClass, TPropsWithSize } from '../../types/components';
 
 export enum BtnThemes {
 	PRIMARY = 'primary',
