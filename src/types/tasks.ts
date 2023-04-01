@@ -1,5 +1,4 @@
-import { TaskColumns } from './data';
-import { TagColor } from './global';
+import { TagColor } from './components';
 
 export type TComment = {
 	author: string;
@@ -15,4 +14,17 @@ export type TTask = {
 };
 
 export type TTasks = Record<TaskColumns, ReadonlyArray<TTask>>;
+
 export type TTagsList = Record<TagColor, boolean>;
+
+export enum TaskColumns {
+	TODO = 'todo',
+	IN_PROGRESS = 'in_progress',
+	DONE = 'done',
+}
+
+export const TaskColumnsTitles: Record<TaskColumns, string> = {
+	[TaskColumns.TODO]: 'Todo',
+	[TaskColumns.IN_PROGRESS]: 'In progress',
+	[TaskColumns.DONE]: 'Done',
+};
