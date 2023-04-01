@@ -8,6 +8,8 @@
 	background: var(--white);
 	box-shadow: var(--box-shadow);
 	border-radius: var(--radius-m);
+
+	user-select: none;
 }
 
 .topSide {

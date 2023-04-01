@@ -1,7 +1,7 @@
 import { FC } from 'react';
 import styles from './Tag.module.scss';
 import classNames from 'classnames';
-import { PropSize, TagColor, TPropsWithClass, TPropsWithSize } from '../../types/global';
+import { PropSize, TagColor, TPropsWithClass, TPropsWithSize } from '../../types/components';
 
 type TProps = {
 	color: TagColor;

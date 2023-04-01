@@ -1,6 +1,6 @@
 import styles from './TaskPage.module.scss';
 import { BtnThemes, Button } from '../../components/Button/Button';
-import { PropSize } from '../../types/global';
+import { PropSize } from '../../types/components';
 import BackBtn from './../../assets/back-btn.svg';
 import { TaskForm } from '../../features/TaskForm/TaskForm';
 
@@ -11,7 +11,7 @@ export const TaskPage = () => {
 				<BackBtn />
 				Вернуться к задачам
 			</Button>
-			<TaskForm label={'Todo'} btnSize={PropSize.S}></TaskForm>
+			{/*<TaskForm label={'Todo'} btnSize={PropSize.S}></TaskForm>*/}
 		</main>
 	);
 };

@@ -10,7 +10,7 @@ import {
 	useState,
 } from 'react';
 import classNames from 'classnames';
-import { PropSize, TagColor, TPropsWithClass } from '../../types/global';
+import { PropSize, TagColor, TPropsWithClass } from '../../types/components';
 import { Checkbox } from '../../components/Checkbox/Checkbox';
 import ArrowIcon from '../../assets/arrow.svg';
 import { TTagsList } from '../../types/tasks';
