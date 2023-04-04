@@ -1,0 +1,33 @@
+@use '../../../styles/mixins';
+
+.card {
+	width: var(--task-card-width);
+
+	padding: 12px;
+
+	background: var(--white);
+	box-shadow: var(--box-shadow);
+	border-radius: var(--radius-m);
+
+	user-select: none;
+}
+
+.title {
+	cursor: pointer;
+}
+
+.topSide {
+	@include mixins.flexible(space-between, flex-start);
+	margin-bottom: 10px;
+}
+
+.bottomSide {
+	@include mixins.flexible(space-between, flex-end);
+}
+
+.tags {
+	display: grid;
+	grid-template-columns: repeat(4, 1fr);
+	grid-column-gap: 6px;
+	grid-row-gap: 6px;
+}

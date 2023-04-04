@@ -10,13 +10,12 @@
 	--yellow: #fff4c7;
 	--white: #ffffff;
 	--border-color: #cacaca;
-	--light-gray: #e0e0e0;
+	--light-gray: #f5f5f5;
 	--gray: #e3e3e3;
 	--dark-gray: #d8d7d7;
 	--yellow-btn: #ffe445;
 
 	--modal-bg: rgba(0, 0, 0, 0.5);
-	--modal-color: #f5f5f5;
 
 	--error-red: #ff0000;
 
@@ -47,4 +46,7 @@
 
 	//z-index
 	--z-index-modal: 10;
+
+	//margins
+	--vertical-labels-margen: 20px
 }

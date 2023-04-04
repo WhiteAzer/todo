@@ -21,7 +21,34 @@ const initialState: TTasks = {
 				[TagColor.ORANGE]: true,
 				[TagColor.VIOLET]: true,
 			},
-			comments: [],
+			comments: [
+				{
+					author: '111Timur Mamedov',
+					text: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit.Lorem ipsum dolor sit amet, consectetur adipisicing elit.Lorem ipsum dolor sit amet, consectetur adipisicing elit.Lorem ipsum dolor sit amet, consectetur adipisicing elit.Lorem ipsum dolor sit amet, consectetur adipisicing elit.Lorem ipsum dolor sit amet, consectetur adipisicing elit.Lorem ipsum dolor sit amet, consectetur adipisicing elit.Lorem ipsum dolor sit amet, consectetur adipisicing elit.Lorem ipsum dolor sit amet, consectetur adipisicing elit.Lorem ipsum dolor sit amet, consectetur adipisicing elit.Lorem ipsum dolor sit amet, consectetur adipisicing elit.',
+					id: 'kfwehf',
+				},
+				{
+					author: 'Timur Mamedov',
+					text: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit.Lorem ipsum dolor sit amet, consectetur adipisicing elit.Lorem ipsum dolor sit amet, consectetur adipisicing elit.Lorem ipsum dolor sit amet, consectetur adipisicing elit.Lorem ipsum dolor sit amet, consectetur adipisicing elit.Lorem ipsum dolor sit amet, consectetur adipisicing elit.Lorem ipsum dolor sit amet, consectetur adipisicing elit.Lorem ipsum dolor sit amet, consectetur adipisicing elit.Lorem ipsum dolor sit amet, consectetur adipisicing elit.Lorem ipsum dolor sit amet, consectetur adipisicing elit.Lorem ipsum dolor sit amet, consectetur adipisicing elit.',
+					id: 'kfweerhf',
+				},
+				{
+					author: 'Timur Mamedov',
+					text: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit.Lorem ipsum dolor sit amet, consectetur adipisicing elit.Lorem ipsum dolor sit amet, consectetur adipisicing elit.Lorem ipsum dolor sit amet, consectetur adipisicing elit.Lorem ipsum dolor sit amet, consectetur adipisicing elit.Lorem ipsum dolor sit amet, consectetur adipisicing elit.Lorem ipsum dolor sit amet, consectetur adipisicing elit.Lorem ipsum dolor sit amet, consectetur adipisicing elit.Lorem ipsum dolor sit amet, consectetur adipisicing elit.Lorem ipsum dolor sit amet, consectetur adipisicing elit.Lorem ipsum dolor sit amet, consectetur adipisicing elit.',
+					id: 'kfwehwefweff',
+				},
+				{
+					author: 'Timur Mamedov',
+					text: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit.Lorem ipsum dolor sit amet, consectetur adipisicing elit.Lorem ipsum dolor sit amet, consectetur adipisicing elit.Lorem ipsum dolor sit amet, consectetur adipisicing elit.Lorem ipsum dolor sit amet, consectetur adipisicing elit.Lorem ipsum dolor sit amet, consectetur adipisicing elit.Lorem ipsum dolor sit amet, consectetur adipisicing elit.Lorem ipsum dolor sit amet, consectetur adipisicing elit.Lorem ipsum dolor sit amet, consectetur adipisicing elit.Lorem ipsum dolor sit amet, consectetur adipisicing elit.Lorem ipsum dolor sit amet, consectetur adipisicing elit.',
+
+					id: 'wcecwecwd',
+				},
+				{
+					author: 'Timur Mamedov',
+					text: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit.Lorem ipsum dolor sit amet, consectetur adipisicing elit.Lorem ipsum dolor sit amet, consectetur adipisicing elit.Lorem ipsum dolor sit amet, consectetur adipisicing elit.Lorem ipsum dolor sit amet, consectetur adipisicing elit.Lorem ipsum dolor sit amet, consectetur adipisicing elit.Lorem ipsum dolor sit amet, consectetur adipisicing elit.Lorem ipsum dolor sit amet, consectetur adipisicing elit.Lorem ipsum dolor sit amet, consectetur adipisicing elit.Lorem ipsum dolor sit amet, consectetur adipisicing elit.Lorem ipsum dolor sit amet, consectetur adipisicing elit.',
+					id: 'wafwfe',
+				},
+			],
 			description: 'description',
 			id: '1id',
 		},
@@ -102,9 +129,49 @@ const tasksSlice = createSlice({
 				)
 			);
 		},
+		removeTask(state, action: PayloadAction<{ id: string }>) {
+			for (const columnName in state) {
+				const column = state[columnName as TaskColumns];
+				for (let i = 0; i < column.length; i++) {
+					if (column[i].id === action.payload.id) {
+						state[columnName as TaskColumns].splice(i, 1);
+						return;
+					}
+				}
+			}
+		},
+		removeComment(state, action: PayloadAction<{ taskId: string; commentId: string }>) {
+			for (const columnName in state) {
+				const column = state[columnName as TaskColumns];
+				for (let i = 0; i < column.length; i++) {
+					if (column[i].id === action.payload.taskId) {
+						column[i].comments = column[i].comments.filter(
+							el => el.id !== action.payload.commentId
+						);
+						return;
+					}
+				}
+			}
+		},
+		addComment(state, action: PayloadAction<{ id: string; author: string; text: string }>) {
+			for (const columnName in state) {
+				const column = state[columnName as TaskColumns];
+				for (let i = 0; i < column.length; i++) {
+					if (column[i].id === action.payload.id) {
+						column[i].comments.push({
+							author: action.payload.author,
+							text: action.payload.text,
+							id: nanoid(),
+						});
+						return;
+					}
+				}
+			}
+		},
 	},
 });
 
-export const { addNewTask, editTask, changePosition } = tasksSlice.actions;
+export const { addNewTask, editTask, changePosition, removeTask, removeComment, addComment } =
+	tasksSlice.actions;
 
 export default tasksSlice.reducer;

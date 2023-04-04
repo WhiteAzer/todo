@@ -1,6 +1,0 @@
-@use '../../styles/mixins';
-
-.wrapper {
-	@include mixins.flexible();
-	@include mixins.stretch();
-}

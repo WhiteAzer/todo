@@ -1,0 +1,14 @@
+.wrapper {
+	width: var(--modal-panel-width);
+	padding: 64px 84px;
+	background-color: var(--light-gray);
+	border-radius: var(--radius-xl);
+	position: relative;
+}
+
+.close {
+	cursor: pointer;
+	position: absolute;
+	right: 30px;
+	top: 30px;
+}

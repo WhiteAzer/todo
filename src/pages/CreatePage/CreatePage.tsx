@@ -1,6 +1,6 @@
 import { FC } from 'react';
-import { ModalPage } from '../../features/ModalPage/ModalPage';
-import { TaskFormCreate } from '../../features/TaskFormCreate/TaskFormCreate';
+import { ModalPage } from '../../features/Modal/ModalPage/ModalPage';
+import { TaskFormCreate } from '../../features/MainPage/TaskFormCreate/TaskFormCreate';
 
 export const CreatePage: FC = () => (
 	<ModalPage>

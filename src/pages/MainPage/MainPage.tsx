@@ -1,6 +1,6 @@
-import { Filters } from '../../features/Filters/Filters';
+import { Filters } from '../../features/MainPage/Filters/Filters';
 import styles from './MainPage.module.scss';
-import { TasksColumn } from '../../features/TasksColumn/TasksColumn';
+import { TasksColumn } from '../../features/MainPage/TasksColumn/TasksColumn';
 import { TaskColumns } from '../../types/tasks';
 import { DragDropContext, OnDragEndResponder } from 'react-beautiful-dnd';
 import { useAppDispatch } from '../../store/hooks/useAppDispatch';

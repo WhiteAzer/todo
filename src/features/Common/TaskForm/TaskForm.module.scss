@@ -1,0 +1,31 @@
+.wrapper {
+	position: relative;
+}
+
+.label {
+	font-size: var(--font-size-l);
+	margin-left: var(--vertical-labels-margen);
+	margin-bottom: 14px;
+}
+
+.content {
+	padding: 14px;
+	border: var(--border);
+	border-radius: var(--radius-l);
+}
+
+.title {
+	margin-bottom: 8px;
+}
+
+.description {
+	margin-bottom: 14px;
+}
+
+.tagsList {
+	margin-bottom: 14px;
+}
+
+.btn {
+	margin: auto;
+}

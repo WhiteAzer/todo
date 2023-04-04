@@ -3,6 +3,7 @@ import { TagColor } from './components';
 export type TComment = {
 	author: string;
 	text: string;
+	id: string;
 };
 
 export type TTask = {
