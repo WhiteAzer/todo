@@ -1,11 +1,31 @@
+@use '../../styles/mixins';
+
 .wrapper {
 	width: var(--task-page-width);
 }
 
-.backBtn {
-	margin-bottom: 70px;
+.backLink {
+	margin-bottom: 64px;
+	width:fit-content;
+	@include mixins.flexible();
 
 	& > svg {
 		margin-right: 18px;
 	}
+}
+
+.moreBtn {
+	position: absolute;
+	top: 0;
+	right: var(--vertical-labels-margen);
+}
+
+.popup {
+	position: absolute;
+	top: -10px;
+	right: 0;
+}
+
+.addCommentBtn {
+	margin-bottom: 10px;
 }
