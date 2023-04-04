@@ -1,0 +1,9 @@
+.btn {
+  font-size: var(--font-size-s);
+  color: var(--font-color-comment);
+  margin-bottom: 10px;
+
+  & > svg {
+    margin-right: 8px;
+  }
+}
