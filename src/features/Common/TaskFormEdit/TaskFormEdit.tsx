@@ -18,7 +18,7 @@ type TProps = {
 } & PropsWithChildren;
 export const TaskFormEdit: FC<TProps> = ({ isFull = false, children, btnSize, canEdit = true }) => {
 	const { taskId } = useParams();
-	const task = useAppSelector(state => selectTaskById(state)(taskId));
+	const task = useAppSelector(selectTaskById(taskId));
 
 	const dispatch = useAppDispatch();
 	const navigate = useNavigate();
