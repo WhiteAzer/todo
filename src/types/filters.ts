@@ -3,3 +3,9 @@ export enum FiltersNames {
 	DESCRIPTION = 'description',
 	TAGS = 'tags',
 }
+
+export const FiltersLabels: Record<FiltersNames, string> = {
+	[FiltersNames.COMMENTS]: 'Комментарий',
+	[FiltersNames.DESCRIPTION]: 'Описание',
+	[FiltersNames.TAGS]: 'Тег',
+};

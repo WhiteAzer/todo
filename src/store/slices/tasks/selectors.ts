@@ -1,5 +1,5 @@
 import { TRootState } from '../../types';
-import { TaskColumns, TTask } from '../../../types/tasks';
+import { TaskColumns } from '../../../types/tasks';
 import { createSelector } from '@reduxjs/toolkit';
 
 export const selectTasks = (state: TRootState) => state.tasks;

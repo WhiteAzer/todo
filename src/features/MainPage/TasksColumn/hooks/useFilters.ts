@@ -1,4 +1,4 @@
-import { useCallback, useMemo } from 'react';
+import { useMemo } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import { TTask } from '../../../../types/tasks';
 import { FiltersNames } from '../../../../types/filters';
