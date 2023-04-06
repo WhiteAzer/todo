@@ -5,7 +5,7 @@ import { useNavigate, useSearchParams } from 'react-router-dom';
 import { addNewTask } from '../../../store/slices/tasks';
 import { TTagsList } from '../../../types/tasks';
 import { TaskColumns } from '../../../types/tasks';
-import { TaskForm } from '../../Common/TaskForm/TaskForm';
+import { TaskForm } from '../TaskForm/TaskForm';
 import { RoutePaths } from '../../../routes/types';
 
 const DefaultTags = Object.values(TagColor).reduce((obj, el) => {
