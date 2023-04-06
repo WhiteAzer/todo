@@ -7,7 +7,7 @@ import { MoreBtn } from '../../Common/MoreBtn/MoreBtn';
 import classNames from 'classnames';
 import { TTagsList } from '../../../types/tasks';
 import { Link } from 'react-router-dom';
-import { Draggable } from 'react-beautiful-dnd';
+import { DNDDraggable } from '../../DND/DNDDraggable/DNDDraggable';
 
 type TProps = TPropsWithClass<{
 	title: string;
@@ -28,34 +28,25 @@ export const TaskCard: FC<TProps> = ({
 	className,
 }) => {
 	return (
-		<Draggable draggableId={id} index={index}>
-			{provided => (
-				<div
-					ref={provided.innerRef}
-					{...provided.draggableProps}
-					{...provided.dragHandleProps}
-					className={classNames(styles.card, className)}
-				>
-					<div className={styles.topSide}>
-						<Link to={`/edit/${id}`}>
-							<h1 className={styles.title}>{title}</h1>
-						</Link>
-						<Link to={`/full/${id}`} onClick={e => e.stopPropagation()}>
-							<MoreBtn />
-						</Link>
-					</div>
-					<div className={styles.bottomSide}>
-						<div className={styles.tags}>
-							{Object.keys(tags)
-								.filter((el: TagColor) => tags[el])
-								.map((el: TagColor) => (
-									<Tag color={el} size={PropSize.XS} key={el} />
-								))}
-						</div>
-						<ContentIndicators isCommented={isCommented} isDescribed={isDescribed} />
-					</div>
+		<DNDDraggable draggableId={id} index={index} className={classNames(styles.card, className)}>
+			<div className={styles.topSide}>
+				<Link to={`/edit/${id}`}>
+					<h1 className={styles.title}>{title}</h1>
+				</Link>
+				<Link to={`/full/${id}`} onClick={e => e.stopPropagation()}>
+					<MoreBtn />
+				</Link>
+			</div>
+			<div className={styles.bottomSide}>
+				<div className={styles.tags}>
+					{Object.keys(tags)
+						.filter((el: TagColor) => tags[el])
+						.map((el: TagColor) => (
+							<Tag color={el} size={PropSize.XS} key={el} />
+						))}
 				</div>
-			)}
-		</Draggable>
+				<ContentIndicators isCommented={isCommented} isDescribed={isDescribed} />
+			</div>
+		</DNDDraggable>
 	);
 };

@@ -4,9 +4,9 @@ import { TaskCard } from '../TaskCard/TaskCard';
 import { TaskColumns, TaskColumnsTitles } from '../../../types/tasks';
 import { useAppSelector } from '../../../store/hooks/useTypedSelector';
 import { selectColumn } from '../../../store/slices/tasks/selectors';
-import { Droppable } from 'react-beautiful-dnd';
 import { AddTaskBtn } from '../AddTaskBtn/AddTaskBtn';
 import { useFilters } from './hooks/useFilters';
+import { DNDDroppable } from '../../DND/DNDDroppable/DNDDroppable';
 
 type TProps = {
 	type: TaskColumns;
@@ -21,27 +21,20 @@ export const TasksColumn: FC<TProps> = ({ type }) => {
 		<div className={styles.wrapper}>
 			<h2 className={styles.title}>{TaskColumnsTitles[type]}</h2>
 			<div className={styles.content}>
-				<Droppable droppableId={type}>
-					{provided => (
-						<div {...provided.droppableProps} ref={provided.innerRef}>
-							{currentTasks.map(
-								({ title, tags, comments, description, id }, index) => (
-									<TaskCard
-										title={title}
-										tags={tags}
-										isCommented={!!comments.length}
-										isDescribed={!!description}
-										key={id}
-										id={id}
-										index={index}
-										className={styles.item}
-									/>
-								)
-							)}
-							{provided.placeholder}
-						</div>
-					)}
-				</Droppable>
+				<DNDDroppable droppableId={type}>
+					{currentTasks.map(({ title, tags, comments, description, id }, index) => (
+						<TaskCard
+							title={title}
+							tags={tags}
+							isCommented={!!comments.length}
+							isDescribed={!!description}
+							key={id}
+							id={id}
+							index={index}
+							className={styles.item}
+						/>
+					))}
+				</DNDDroppable>
 				{type !== TaskColumns.DONE && (
 					<AddTaskBtn target={type} className={currentTasks.length && styles.btn} />
 				)}
