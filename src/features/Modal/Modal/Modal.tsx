@@ -19,9 +19,12 @@ export const Modal: FC<TProps> = ({ isOpen, closeModal, children }) => {
 	);
 
 	useEffect(() => {
-		isOpen
-			? window.addEventListener('keydown', handleEnter)
-			: window.removeEventListener('keydown', handleEnter);
+		if (isOpen) {
+			window.addEventListener('keydown', handleEnter);
+		}
+		return () => {
+			window.removeEventListener('keydown', handleEnter);
+		};
 	}, [handleEnter, isOpen]);
 
 	const handleClose: MouseEventHandler<HTMLDivElement> = e => {
