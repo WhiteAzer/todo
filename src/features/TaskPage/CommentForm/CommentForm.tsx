@@ -7,8 +7,7 @@ import { PropSize } from '../../../types/components';
 import { useAppDispatch } from '../../../store/hooks/useAppDispatch';
 import { useParams } from 'react-router-dom';
 import { addComment } from '../../../store/slices/tasks';
-import { types } from 'sass';
-import Boolean = types.Boolean;
+import { validateComment } from '../../../utils/validateComment';
 
 type TProps = {
 	closeModal: () => void;
@@ -17,27 +16,6 @@ type TProps = {
 export const CommentForm: FC<TProps> = ({ closeModal }) => {
 	const { taskId } = useParams();
 	const dispatch = useAppDispatch();
-
-	const validate = (values: { author: string; text: string }) => {
-		const errors: Partial<typeof values> = {};
-
-		if (!values.author) {
-			errors.author = 'Введите имя';
-		} else if (
-			values.author.split(' ').length < 2 ||
-			values.author.split(' ').some(el => el === '')
-		) {
-			errors.author = 'Введите полное имя';
-		}
-
-		if (!values.text) {
-			errors.text = 'Введите комментарий';
-		} else if (values.text.length < 5) {
-			errors.text = 'Комментарий слишклм короткий';
-		}
-
-		return errors;
-	};
 
 	const handleSubmit = useCallback(
 		({ author, text }: { author: string; text: string }) => {
@@ -56,7 +34,7 @@ export const CommentForm: FC<TProps> = ({ closeModal }) => {
 						author: '',
 						text: '',
 					}}
-					validate={validate}
+					validate={validateComment}
 					onSubmit={handleSubmit}
 				>
 					<Form>

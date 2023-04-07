@@ -6,6 +6,7 @@ import { PropSize, TBtnSize } from '../../../types/components';
 import { Form, Formik } from 'formik';
 import { TagsList } from '../TagsList/TagsList';
 import { TTagsList } from '../../../types/tasks';
+import { validateTask } from '../../../utils/validateTask';
 
 type TProps = {
 	label: string;
@@ -29,18 +30,6 @@ export const TaskForm: FC<TProps> = ({
 	children,
 	canEdit = true,
 }) => {
-	const validate = (values: { title: string }) => {
-		const errors: Partial<typeof values> = {};
-
-		if (!values.title) {
-			errors.title = 'Введите название';
-		} else if (values.title.length < 5) {
-			errors.title = 'Слишком короткое название';
-		}
-
-		return errors;
-	};
-
 	return (
 		<div className={styles.wrapper}>
 			<h3 className={styles.label}>{label}</h3>
@@ -50,7 +39,7 @@ export const TaskForm: FC<TProps> = ({
 						title,
 						description,
 					}}
-					validate={validate}
+					validate={validateTask}
 					onSubmit={handleSubmit}
 				>
 					<Form>
