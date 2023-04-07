@@ -1,18 +1,18 @@
 @use '../../../styles/mixins';
 
 .modal {
-  width: fit-content;
+	width: fit-content;
 }
 
 .text {
-  font-weight: var(--font-weight-bold);
-  margin-bottom: 24px;
+	font-weight: var(--font-weight-bold);
+	margin-bottom: 24px;
 }
 
 .btns {
-  @include mixins.flexible();
+	@include mixins.flexible();
 
-  & > button:not(:last-child) {
-    margin-right: 12px;
-  }
+	& > button:not(:last-child) {
+		margin-right: 12px;
+	}
 }
