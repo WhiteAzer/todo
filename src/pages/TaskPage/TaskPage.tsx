@@ -4,26 +4,14 @@ import { Link } from 'react-router-dom';
 import { TaskFormEdit } from '../../features/Common/TaskFormEdit/TaskFormEdit';
 import { MoreBtn } from '../../features/Common/MoreBtn/MoreBtn';
 import { TaskPopup } from '../../features/TaskPage/TaskPopup/TaskPopup';
-import { useToggle } from '../../hooks/useToggle';
 import { PropSize } from '../../types/components';
-import { MouseEventHandler, useCallback, useState } from 'react';
 import { AddCommentBtn } from '../../features/TaskPage/AddCommentBtn/AddCommentBtn';
+import { usePopup } from './hooks/usePopup';
+import { useEdit } from './hooks/useEdit';
 
-export const TaskPage = () => {
-	const [isPopupVisible, togglePopupVisible] = useToggle(false);
-	const [canEdit, setCanEdit] = useState(false);
-
-	const handlePopupClick = useCallback<MouseEventHandler<HTMLButtonElement>>(
-		e => {
-			e.stopPropagation();
-			togglePopupVisible();
-		},
-		[togglePopupVisible]
-	);
-
-	const handleEdit = useCallback(() => {
-		setCanEdit(true);
-	}, []);
+const TaskPage = () => {
+	const { isPopupVisible, togglePopupVisible, handlePopupClick } = usePopup();
+	const [canEdit, handleEdit] = useEdit();
 
 	return (
 		<main className={styles.wrapper}>
@@ -44,3 +32,5 @@ export const TaskPage = () => {
 		</main>
 	);
 };
+
+export default TaskPage;

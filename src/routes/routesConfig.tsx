@@ -4,12 +4,12 @@ import { CreatePage } from '../pages/CreatePage/CreatePage';
 import { ReactNode } from 'react';
 import { RoutePaths } from './types';
 import { EditPageAsync } from '../pages/EditPage/EditPage.async';
-import { TaskPage } from '../pages/TaskPage/TaskPage';
+import { TaskPageAsync } from '../pages/TaskPage/TaskPage.async';
 
 export const routeConfig: Record<RoutePaths, ReactNode> = {
 	[RoutePaths.MAIN]: <MainPageAsync />,
 	[RoutePaths.CREATE]: <CreatePage />,
 	[RoutePaths.EDIT]: <EditPageAsync />,
-	[RoutePaths.FULL]: <TaskPage />,
+	[RoutePaths.FULL]: <TaskPageAsync />,
 	[RoutePaths.NOT_FOUND]: <NotFoundPage />,
 };
