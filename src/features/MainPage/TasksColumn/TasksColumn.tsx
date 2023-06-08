@@ -22,14 +22,14 @@ export const TasksColumn: FC<TProps> = ({ type }) => {
 			<h2 className={styles.title}>{TaskColumnsTitles[type]}</h2>
 			<div className={styles.content}>
 				<DNDDroppable droppableId={type}>
-					{currentTasks.map(({ title, tags, comments, description, id }, index) => (
+					{currentTasks.map(({ title, tags, comments, description, _id }, index) => (
 						<TaskCard
 							title={title}
 							tags={tags}
 							isCommented={!!comments.length}
 							isDescribed={!!description}
-							key={id}
-							id={id}
+							key={_id}
+							id={_id}
 							index={index}
 							className={styles.item}
 						/>

@@ -6,8 +6,8 @@ import { Form, Formik } from 'formik';
 import { PropSize } from '../../../types/components';
 import { useAppDispatch } from '../../../store/hooks/useAppDispatch';
 import { useParams } from 'react-router-dom';
-import { addComment } from '../../../store/slices/tasks';
 import { validateComment } from '../../../utils/validateComment';
+import { addComment } from '../../../store/slices/tasks/thunks';
 
 type TProps = {
 	closeModal: () => void;
@@ -19,7 +19,7 @@ export const CommentForm: FC<TProps> = ({ closeModal }) => {
 
 	const handleSubmit = useCallback(
 		({ author, text }: { author: string; text: string }) => {
-			dispatch(addComment({ author, text, id: taskId }));
+			dispatch(addComment({ author, text, taskId: taskId }));
 			closeModal();
 		},
 		[dispatch, taskId, closeModal]

@@ -1,177 +1,160 @@
-import { createSlice, nanoid, PayloadAction } from '@reduxjs/toolkit';
-import { TagColor } from '../../../types/components';
+import { createSlice } from '@reduxjs/toolkit';
 import { TaskColumns } from '../../../types/tasks';
-import { TTagsList, TTask, TTasks } from '../../../types/tasks';
-import { DraggableLocation } from 'react-beautiful-dnd';
+import { TTask, TTasks } from '../../../types/tasks';
+import {
+	addComment,
+	addNewTask,
+	changePosition,
+	editTask,
+	getAllTasks,
+	removeComment,
+	removeTask,
+} from './thunks';
 
-const DefaultTags = Object.values(TagColor).reduce((obj, el) => {
-	obj[el] = false;
-	return obj;
-}, {} as TTagsList);
+type TState = {
+	status: 'idle' | 'loading' | 'succeeded' | 'failed';
+	error: string | null;
+} & TTasks;
 
-const initialState: TTasks = {
-	[TaskColumns.TODO]: [
-		{
-			title: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit.',
-			tags: {
-				...DefaultTags,
-				[TagColor.BLUE]: true,
-				[TagColor.DARK_BLUE]: true,
-				[TagColor.LIGHT_GREEN]: true,
-				[TagColor.ORANGE]: true,
-				[TagColor.VIOLET]: true,
-			},
-			comments: [
-				{
-					author: '111Timur Mamedov',
-					text: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit.Lorem ipsum dolor sit amet, consectetur adipisicing elit.Lorem ipsum dolor sit amet, consectetur adipisicing elit.Lorem ipsum dolor sit amet, consectetur adipisicing elit.Lorem ipsum dolor sit amet, consectetur adipisicing elit.Lorem ipsum dolor sit amet, consectetur adipisicing elit.Lorem ipsum dolor sit amet, consectetur adipisicing elit.Lorem ipsum dolor sit amet, consectetur adipisicing elit.Lorem ipsum dolor sit amet, consectetur adipisicing elit.Lorem ipsum dolor sit amet, consectetur adipisicing elit.Lorem ipsum dolor sit amet, consectetur adipisicing elit.',
-					id: 'kfwehf',
-				},
-				{
-					author: 'Timur Mamedov',
-					text: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit.Lorem ipsum dolor sit amet, consectetur adipisicing elit.Lorem ipsum dolor sit amet, consectetur adipisicing elit.Lorem ipsum dolor sit amet, consectetur adipisicing elit.Lorem ipsum dolor sit amet, consectetur adipisicing elit.Lorem ipsum dolor sit amet, consectetur adipisicing elit.Lorem ipsum dolor sit amet, consectetur adipisicing elit.Lorem ipsum dolor sit amet, consectetur adipisicing elit.Lorem ipsum dolor sit amet, consectetur adipisicing elit.Lorem ipsum dolor sit amet, consectetur adipisicing elit.Lorem ipsum dolor sit amet, consectetur adipisicing elit.',
-					id: 'kfweerhf',
-				},
-				{
-					author: 'Timur Mamedov',
-					text: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit.Lorem ipsum dolor sit amet, consectetur adipisicing elit.Lorem ipsum dolor sit amet, consectetur adipisicing elit.Lorem ipsum dolor sit amet, consectetur adipisicing elit.Lorem ipsum dolor sit amet, consectetur adipisicing elit.Lorem ipsum dolor sit amet, consectetur adipisicing elit.Lorem ipsum dolor sit amet, consectetur adipisicing elit.Lorem ipsum dolor sit amet, consectetur adipisicing elit.Lorem ipsum dolor sit amet, consectetur adipisicing elit.Lorem ipsum dolor sit amet, consectetur adipisicing elit.Lorem ipsum dolor sit amet, consectetur adipisicing elit.',
-					id: 'kfwehwefweff',
-				},
-				{
-					author: 'Timur Mamedov',
-					text: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit.Lorem ipsum dolor sit amet, consectetur adipisicing elit.Lorem ipsum dolor sit amet, consectetur adipisicing elit.Lorem ipsum dolor sit amet, consectetur adipisicing elit.Lorem ipsum dolor sit amet, consectetur adipisicing elit.Lorem ipsum dolor sit amet, consectetur adipisicing elit.Lorem ipsum dolor sit amet, consectetur adipisicing elit.Lorem ipsum dolor sit amet, consectetur adipisicing elit.Lorem ipsum dolor sit amet, consectetur adipisicing elit.Lorem ipsum dolor sit amet, consectetur adipisicing elit.Lorem ipsum dolor sit amet, consectetur adipisicing elit.',
-
-					id: 'wcecwecwd',
-				},
-				{
-					author: 'Timur Mamedov',
-					text: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit.Lorem ipsum dolor sit amet, consectetur adipisicing elit.Lorem ipsum dolor sit amet, consectetur adipisicing elit.Lorem ipsum dolor sit amet, consectetur adipisicing elit.Lorem ipsum dolor sit amet, consectetur adipisicing elit.Lorem ipsum dolor sit amet, consectetur adipisicing elit.Lorem ipsum dolor sit amet, consectetur adipisicing elit.Lorem ipsum dolor sit amet, consectetur adipisicing elit.Lorem ipsum dolor sit amet, consectetur adipisicing elit.Lorem ipsum dolor sit amet, consectetur adipisicing elit.Lorem ipsum dolor sit amet, consectetur adipisicing elit.',
-					id: 'wafwfe',
-				},
-			],
-			description: 'description',
-			id: '1id',
-		},
-	],
-	[TaskColumns.IN_PROGRESS]: [
-		{
-			title: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit.',
-			tags: {
-				...DefaultTags,
-				[TagColor.BLUE]: true,
-				[TagColor.DARK_BLUE]: true,
-				[TagColor.LIGHT_GREEN]: true,
-				[TagColor.ORANGE]: true,
-				[TagColor.VIOLET]: true,
-			},
-			comments: [],
-			description: 'description',
-			id: '2id',
-		},
-	],
-	[TaskColumns.DONE]: [
-		{
-			title: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit.',
-			tags: {
-				...DefaultTags,
-				[TagColor.BLUE]: true,
-				[TagColor.DARK_BLUE]: true,
-				[TagColor.LIGHT_GREEN]: true,
-				[TagColor.ORANGE]: true,
-				[TagColor.VIOLET]: true,
-			},
-			comments: [],
-			description: 'description',
-			id: '3id',
-		},
-	],
+const initialState: TState = {
+	[TaskColumns.TODO]: [],
+	[TaskColumns.IN_PROGRESS]: [],
+	[TaskColumns.DONE]: [],
+	status: 'idle',
+	error: null,
 };
 
 const tasksSlice = createSlice({
 	name: 'tasks',
 	initialState,
-	reducers: {
-		addNewTask(
-			state,
-			action: PayloadAction<Omit<TTask, 'id' | 'comments'> & { target: TaskColumns }>
-		) {
-			state[action.payload.target].push({
-				title: action.payload.title,
-				description: action.payload.description,
-				tags: action.payload.tags,
-				comments: [],
-				id: nanoid(),
+	reducers: {},
+	extraReducers: builder => {
+		builder
+			.addCase(getAllTasks.fulfilled, (state, action) => {
+				state.status = 'succeeded';
+				action.payload.forEach(
+					(el: { _id: TaskColumns; data: Array<TTask> }) => (state[el._id] = el.data)
+				);
+			})
+			.addCase(getAllTasks.pending, state => {
+				state.status = 'loading';
+			})
+			.addCase(getAllTasks.rejected, (state, action) => {
+				state.status = 'failed';
+				state.error = action.error?.message || String(action.error);
 			});
-		},
-		editTask(state, action: PayloadAction<Omit<TTask, 'comments'>>) {
-			for (const columnName in state) {
-				const column = state[columnName as TaskColumns];
-				for (let i = 0; i < column.length; i++) {
-					if (column[i].id === action.payload.id) {
-						column[i].title = action.payload.title;
-						column[i].description = action.payload.description;
-						column[i].tags = action.payload.tags;
-						return;
+
+		builder
+			.addCase(changePosition.fulfilled, (state, action) => {
+				state.status = 'succeeded';
+				action.payload.forEach(
+					(el: { _id: TaskColumns; data: Array<TTask> }) => (state[el._id] = el.data)
+				);
+			})
+			.addCase(changePosition.pending, state => {
+				state.status = 'loading';
+			})
+			.addCase(changePosition.rejected, (state, action) => {
+				state.status = 'failed';
+				state.error = action.error?.message || String(action.error);
+			});
+
+		builder
+			.addCase(addNewTask.fulfilled, (state, action) => {
+				state.status = 'succeeded';
+				state[action.payload.target as TaskColumns].push(action.payload.task);
+			})
+			.addCase(addNewTask.pending, state => {
+				state.status = 'loading';
+			})
+			.addCase(addNewTask.rejected, (state, action) => {
+				state.status = 'failed';
+				state.error = action.error?.message || String(action.error);
+			});
+
+		builder
+			.addCase(editTask.fulfilled, (state, action) => {
+				state.status = 'succeeded';
+				for (const column of Object.values(TaskColumns)) {
+					for (let i = 0; i < state[column].length; i++) {
+						if (state[column][i]._id === action.payload._id) {
+							state[column][i] = action.payload;
+							return;
+						}
 					}
 				}
-			}
-		},
-		changePosition(
-			state,
-			action: PayloadAction<{ source: DraggableLocation; destination: DraggableLocation }>
-		) {
-			state[action.payload.destination.droppableId as TaskColumns].splice(
-				action.payload.destination.index,
-				0,
-				...state[action.payload.source.droppableId as TaskColumns].splice(
-					action.payload.source.index,
-					1
-				)
-			);
-		},
-		removeTask(state, action: PayloadAction<{ id: string }>) {
-			for (const columnName in state) {
-				const column = state[columnName as TaskColumns];
-				for (let i = 0; i < column.length; i++) {
-					if (column[i].id === action.payload.id) {
-						state[columnName as TaskColumns].splice(i, 1);
-						return;
+			})
+			.addCase(editTask.pending, state => {
+				state.status = 'loading';
+			})
+			.addCase(editTask.rejected, (state, action) => {
+				state.status = 'failed';
+				state.error = action.error?.message || String(action.error);
+			});
+
+		builder
+			.addCase(removeTask.fulfilled, (state, action) => {
+				state.status = 'succeeded';
+				for (const column of Object.values(TaskColumns)) {
+					for (let i = 0; i < state[column].length; i++) {
+						if (state[column][i]._id === action.payload._id) {
+							state[column].splice(i, 1);
+							return;
+						}
 					}
 				}
-			}
-		},
-		removeComment(state, action: PayloadAction<{ taskId: string; commentId: string }>) {
-			for (const columnName in state) {
-				const column = state[columnName as TaskColumns];
-				for (let i = 0; i < column.length; i++) {
-					if (column[i].id === action.payload.taskId) {
-						column[i].comments = column[i].comments.filter(
-							el => el.id !== action.payload.commentId
-						);
-						return;
+			})
+			.addCase(removeTask.pending, state => {
+				state.status = 'loading';
+			})
+			.addCase(removeTask.rejected, (state, action) => {
+				state.status = 'failed';
+				state.error = action.error?.message || String(action.error);
+			});
+
+		builder
+			.addCase(addComment.fulfilled, (state, action) => {
+				state.status = 'succeeded';
+				for (const column of Object.values(TaskColumns)) {
+					for (let i = 0; i < state[column].length; i++) {
+						if (state[column][i]._id === action.payload.taskId) {
+							state[column][i].comments.push(action.payload.comment);
+							return;
+						}
 					}
 				}
-			}
-		},
-		addComment(state, action: PayloadAction<{ id: string; author: string; text: string }>) {
-			for (const columnName in state) {
-				const column = state[columnName as TaskColumns];
-				for (let i = 0; i < column.length; i++) {
-					if (column[i].id === action.payload.id) {
-						column[i].comments.push({
-							author: action.payload.author,
-							text: action.payload.text,
-							id: nanoid(),
-						});
-						return;
+			})
+			.addCase(addComment.pending, state => {
+				state.status = 'loading';
+			})
+			.addCase(addComment.rejected, (state, action) => {
+				state.status = 'failed';
+				state.error = action.error?.message || String(action.error);
+			});
+
+		builder
+			.addCase(removeComment.fulfilled, (state, action) => {
+				state.status = 'succeeded';
+				for (const column of Object.values(TaskColumns)) {
+					for (let i = 0; i < state[column].length; i++) {
+						if ((state[column][i]._id = action.payload.taskId)) {
+							const task = state[column][i];
+							task.comments = task.comments.filter(
+								comment => comment._id !== action.payload._id
+							);
+							return;
+						}
 					}
 				}
-			}
-		},
+			})
+			.addCase(removeComment.pending, state => {
+				state.status = 'loading';
+			})
+			.addCase(removeComment.rejected, (state, action) => {
+				state.status = 'failed';
+				state.error = action.error?.message || String(action.error);
+			});
 	},
 });
-
-export const { addNewTask, editTask, changePosition, removeTask, removeComment, addComment } =
-	tasksSlice.actions;
 
 export default tasksSlice.reducer;

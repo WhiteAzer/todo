@@ -2,11 +2,11 @@ import { FC } from 'react';
 import styles from './RemoveTaskModal.module.scss';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useAppDispatch } from '../../../store/hooks/useAppDispatch';
-import { removeTask } from '../../../store/slices/tasks';
 import { Modal } from '../../Modal/Modal/Modal';
 import { ModalPanel } from '../../Modal/ModlalPanel/ModalPanel';
 import { BtnThemes, Button } from '../../../components/Button/Button';
 import { PropSize } from '../../../types/components';
+import { removeTask } from '../../../store/slices/tasks/thunks';
 
 type TProps = {
 	isOpen: boolean;
@@ -19,7 +19,7 @@ export const RemoveTaskModal: FC<TProps> = ({ isOpen, closeModal }) => {
 	const dispatch = useAppDispatch();
 
 	const handleRemove = () => {
-		dispatch(removeTask({ id: taskId }));
+		dispatch(removeTask(taskId));
 		navigate('/');
 	};
 	return (

@@ -3,7 +3,7 @@ import { TagColor } from './components';
 export type TComment = {
 	author: string;
 	text: string;
-	id: string;
+	_id: string;
 };
 
 export type TTask = {
@@ -11,7 +11,7 @@ export type TTask = {
 	description: string;
 	tags: TTagsList;
 	comments: Array<TComment>;
-	id: string;
+	_id: string;
 };
 
 export type TTasks = Record<TaskColumns, ReadonlyArray<TTask>>;

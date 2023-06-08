@@ -1,7 +1,7 @@
 import { FC, PropsWithChildren, useCallback } from 'react';
 import { DragDropContext, OnDragEndResponder } from 'react-beautiful-dnd';
 import { useAppDispatch } from '../../../store/hooks/useAppDispatch';
-import { changePosition } from '../../../store/slices/tasks';
+import { changePosition } from '../../../store/slices/tasks/thunks';
 
 export const DNDContext: FC<PropsWithChildren> = ({ children }) => {
 	const dispatch = useAppDispatch();

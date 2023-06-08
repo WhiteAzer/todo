@@ -8,10 +8,16 @@ import { PropSize } from '../../types/components';
 import { AddCommentBtn } from '../../features/TaskPage/AddCommentBtn/AddCommentBtn';
 import { usePopup } from './hooks/usePopup';
 import { useEdit } from './hooks/useEdit';
+import { useAppSelector } from '../../store/hooks/useTypedSelector';
+import { selectTaskStatus } from '../../store/slices/tasks/selectors';
+import { Loader } from '../../features/Common/Loader/Loader';
 
 const TaskPage = () => {
 	const { isPopupVisible, togglePopupVisible, handlePopupClick } = usePopup();
 	const [canEdit, handleEdit] = useEdit();
+	const status = useAppSelector(selectTaskStatus);
+
+	if (status === 'idle' || status === 'loading') return <Loader />;
 
 	return (
 		<main className={styles.wrapper}>

@@ -3,13 +3,14 @@ import { FC, PropsWithChildren, useCallback, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { TTagsList } from '../../../types/tasks';
 import { useAppSelector } from '../../../store/hooks/useTypedSelector';
-import { selectTaskById } from '../../../store/slices/tasks/selectors';
+import { selectTaskById, selectTaskStatus } from '../../../store/slices/tasks/selectors';
 import { useAppDispatch } from '../../../store/hooks/useAppDispatch';
-import { editTask } from '../../../store/slices/tasks';
 import { RoutePaths } from '../../../routes/types';
 import { TaskForm } from '../TaskForm/TaskForm';
 import { Comment } from '../../TaskPage/Comment/Comment';
 import { TBtnSize } from '../../../types/components';
+import { editTask } from '../../../store/slices/tasks/thunks';
+import { Loader } from '../Loader/Loader';
 
 type TProps = {
 	isFull?: boolean;
@@ -17,6 +18,7 @@ type TProps = {
 	canEdit?: boolean;
 } & PropsWithChildren;
 export const TaskFormEdit: FC<TProps> = ({ isFull = false, children, btnSize, canEdit = true }) => {
+	const Status = useAppSelector(selectTaskStatus);
 	const { taskId } = useParams();
 	const task = useAppSelector(selectTaskById(taskId));
 
@@ -27,12 +29,14 @@ export const TaskFormEdit: FC<TProps> = ({ isFull = false, children, btnSize, ca
 
 	const handleSubmit = useCallback(
 		({ title, description }: { title: string; description: string }) => {
-			dispatch(editTask({ title, description, tags, id: taskId }));
+			dispatch(editTask({ title, description, tags, _id: taskId }));
 
 			navigate(RoutePaths.MAIN);
 		},
 		[tags, dispatch, navigate, taskId]
 	);
+
+	if (Status === 'idle') return <Loader />;
 
 	return (
 		<TaskForm
@@ -47,13 +51,13 @@ export const TaskFormEdit: FC<TProps> = ({ isFull = false, children, btnSize, ca
 		>
 			{isFull && !!task.comments.length && (
 				<div className={styles.comments}>
-					{task.comments.map(({ author, text, id }) => (
+					{task.comments.map(({ author, text, _id }) => (
 						<Comment
 							author={author}
 							text={text}
-							id={id}
+							id={_id}
 							canEdit={canEdit}
-							key={id}
+							key={_id}
 							className={styles.comment}
 						/>
 					))}
